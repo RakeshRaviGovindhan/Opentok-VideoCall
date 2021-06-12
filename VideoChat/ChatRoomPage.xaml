@@ -1,0 +1,48 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
+             xmlns:tok="clr-namespace:VideoChat.OpenTok.Views"
+             xmlns:tokService="clr-namespace:VideoChat.OpenTok.Service"
+             x:Class="VideoChat.ChatRoomPage"
+             BackgroundColor="Black">
+
+    <StackLayout Spacing="1">
+        <tok:OpenTokPublisherView HeightRequest="200" BackgroundColor="Black"/>
+        <StackLayout BindableLayout.ItemsSource="{Binding Path=StreamIdCollection, Source={x:Static tokService:CrossOpenTok.Current}}">
+            <BindableLayout.ItemTemplate>
+                <DataTemplate>
+                    <tok:OpenTokSubscriberView BackgroundColor="LightGreen" HeightRequest="400" StreamId="{Binding .}"/>
+                </DataTemplate>
+            </BindableLayout.ItemTemplate>
+        </StackLayout>
+        <Grid Margin="0,10,0,10" HorizontalOptions="Center" 
+              BackgroundColor="Black" 
+              RowDefinitions="60" 
+              ColumnSpacing="20"
+              Padding="10"
+              ColumnDefinitions="Auto, Auto, Auto, Auto">
+
+            <Image Source="EndCall.png" Grid.Row="0" Grid.Column="0">
+                <Image.GestureRecognizers>
+                    <TapGestureRecognizer Tapped="OnEndCall"/>
+                </Image.GestureRecognizers>
+            </Image>
+            <Image Source="chat_32px.png" Grid.Row="0" Grid.Column="1">
+                <Image.GestureRecognizers>
+                    <TapGestureRecognizer Tapped="OnMessage"/>
+                </Image.GestureRecognizers>
+            </Image>
+            <Image Source="SwapCamera.png" Grid.Row="0" Grid.Column="2">
+                <Image.GestureRecognizers>
+                    <TapGestureRecognizer Tapped="OnSwapCamera"/>
+                </Image.GestureRecognizers>
+            </Image>
+            <Image Source="share.png" Grid.Row="0" Grid.Column="3">
+                <Image.GestureRecognizers>
+                    <TapGestureRecognizer Tapped="OnShareScreen"/>
+                </Image.GestureRecognizers>
+            </Image>
+        </Grid>
+
+    </StackLayout>
+</ContentPage>
