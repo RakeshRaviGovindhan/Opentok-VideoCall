@@ -57,5 +57,29 @@ namespace VideoChat
                 ? OpenTokPublisherVideoType.Screen
                 : OpenTokPublisherVideoType.Camera;
         }
+
+        private void OnSwitchCameraClicked(object sender, EventArgs e)
+        {
+            CrossOpenTok.Current.PublisherVideoType = CrossOpenTok.Current.PublisherVideoType == OpenTokPublisherVideoType.Camera
+                ? OpenTokPublisherVideoType.Screen
+                : OpenTokPublisherVideoType.Camera;
+        }
+
+        private void OnLocalVideoMuteClicked(object sender, EventArgs e)
+        {
+
+        }
+
+        private void OnLocalAudioMuteClicked(object sender, EventArgs e)
+        {
+
+        }
+
+        private void OnEndCallClicked(object sender, EventArgs e)
+        {
+            CrossOpenTok.Current.EndSession();
+            CrossOpenTok.Current.MessageReceived -= OnMessageReceived;
+            Navigation.PopModalAsync();
+        }
     }
 }
